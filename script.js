@@ -40,18 +40,23 @@ const typeController = (e) => {
 
   // if it is not a valid character like Control/Alt then skip displaying anything
   if (!validLetters.includes(newLetter)) {
+   
     return;
   }
 
   userText += newLetter;
-
+  
   const newLetterCorrect = validate(newLetter);
 
   if (newLetterCorrect) {
     display.innerHTML += `<span class="green">${newLetter === " " ? "▪" : newLetter}</span>`;
   } else {
     display.innerHTML += `<span class="red">${newLetter === " " ? "▪" : newLetter}</span>`;
+    
+
   }
+
+  
 
   // check if given question text is equal to user typed text
   if (questionText === userText) {
@@ -67,6 +72,7 @@ const validate = (key) => {
   }
   return false;
 };
+
 
 // FINISHED TYPING
 const gameOver = () => {
@@ -91,7 +97,7 @@ const gameOver = () => {
     <p>You made <span class="bold red">${errorCount}</span> mistakes</p>
     <button onclick="closeModal()">Close</button>
   `;
-
+console.log(errorCount)
   addHistory(questionText, timeTaken, errorCount);
 
   // restart everything
