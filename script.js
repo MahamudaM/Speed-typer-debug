@@ -17,6 +17,7 @@ fetch("./texts.json")
   .then((data) => {
     questionText = data[Math.floor(Math.random() * data.length)];
     question.innerHTML = questionText;
+
   });
 
 // checks the user typed character and displays accordingly
@@ -50,7 +51,8 @@ const typeController = (e) => {
 
   // check if given question text is equal to user typed text
   if (questionText === userText) {
-    gameOver();
+  
+    addHistory();
   }
 };
 
@@ -88,11 +90,12 @@ const gameOver = () => {
   addHistory(questionText, timeTaken, errorCount);
 console.log(timeTaken);
   // restart everything
-   startTime = null;
+   startTime = 0;
    console.log(startTime)
   errorCount = 0;
   userText = "";
   display.classList.add("inactive");
+  
 };
 
 const closeModal = () => {
@@ -103,11 +106,12 @@ const closeModal = () => {
 const start = () => {
   // If already started, do not start again
   if (startTime)return;
-
+  
+  // displayHistory();
   let count = 3;
   
   countdownOverlay.style.display = "flex";
-
+  
   const startCountdown = setInterval(() => {
     
     countdownOverlay.innerHTML = `<h1>${count}</h1>`;
@@ -117,7 +121,7 @@ const start = () => {
     if (count == 0) {
       
       // -------------- START TYPING -----------------
-document.addEventListener("keydown", typeController);
+      document.addEventListener("keydown", typeController);
 countdownOverlay.style.display = "none";
 display.classList.remove("inactive");
 
@@ -128,7 +132,7 @@ clearInterval(startCountdown);
   }, 1000);
 
   
-  
+
 };
 
 // START Countdown
