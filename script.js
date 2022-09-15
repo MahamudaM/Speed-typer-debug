@@ -86,7 +86,7 @@ const gameOver = () => {
   `;
 
   addHistory(questionText, timeTaken, errorCount);
-
+console.log(timeTaken);
   // restart everything
    startTime = null;
    console.log(startTime)
@@ -105,25 +105,30 @@ const start = () => {
   if (startTime)return;
 
   let count = 3;
+  
   countdownOverlay.style.display = "flex";
 
   const startCountdown = setInterval(() => {
+    
     countdownOverlay.innerHTML = `<h1>${count}</h1>`;
-  
-
-  
+    
+    // console.log(count)
     // finished timer
     if (count == 0) {
+      
       // -------------- START TYPING -----------------
-      document.addEventListener("keydown", typeController);
-      countdownOverlay.style.display = "flex";
-      display.classList.remove("inactive");
+document.addEventListener("keydown", typeController);
+countdownOverlay.style.display = "none";
+display.classList.remove("inactive");
 
-      clearInterval(startCountdown);
+clearInterval(startCountdown);
       startTime = new Date().getTime() ;
     }
     count--;
   }, 1000);
+
+  
+  
 };
 
 // START Countdown
